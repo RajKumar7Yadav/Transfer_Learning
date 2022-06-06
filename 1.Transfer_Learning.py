@@ -36,15 +36,15 @@ model=VGG16()
 model.summary()
 
 # the prediction layer has been removed
-# layer_name='fc2'
-# model1=Model(inputs=model.input,outputs=model.get_layer(layer_name).output)
-# model1.summary()
+layer_name='fc2'
+model1=Model(inputs=model.input,outputs=model.get_layer(layer_name).output)
+model1.summary()
 
-# #Now we will add 2 of our own prediction layer
-# prediction=Dense(10,activation='softmax')(model1.layers[-1].output)
-# Vgg16_new=Model(inputs=model1.input,outputs=prediction)
-# prediction=Dense(5,activation='softmax')(Vgg16_new.layers[-1].output)
-# Vgg16_new=Model(inputs=model1.input,outputs=prediction)
+#Now we will add 2 of our own prediction layer
+prediction=Dense(10,activation='softmax')(model1.layers[-1].output)
+Vgg16_new=Model(inputs=model1.input,outputs=prediction)
+prediction=Dense(5,activation='softmax')(Vgg16_new.layers[-1].output)
+Vgg16_new=Model(inputs=model1.input,outputs=prediction)
 
-# #model_new.compile(optimizer='adam',loss='categorical_crossentropy')
-# Vgg16_new.summary()
+#model_new.compile(optimizer='adam',loss='categorical_crossentropy')
+Vgg16_new.summary()
